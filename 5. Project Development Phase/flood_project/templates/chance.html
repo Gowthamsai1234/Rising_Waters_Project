@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚠️ Flood Risk Detected — Rising Waters</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span>🌊</span>
+      <span>Rising <em>Waters</em></span>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/Predict" class="nav-cta">New Prediction</a>
+    </div>
+  </nav>
+
+  <!-- ── Page Header ──────────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-header-label">Prediction Result</div>
+    <h1>Risk Assessment Complete</h1>
+    <p>Analysis based on your meteorological inputs</p>
+  </div>
+
+  <!-- ── Result Card ──────────────────────────────────── -->
+  <div class="result-wrapper">
+    <div class="result-card">
+
+      <div class="result-topbar flood"></div>
+
+      <!-- Hero -->
+      <div class="result-hero flood-bg">
+        <div class="result-icon-ring flood">⚠️</div>
+        <div class="result-verdict">FLOOD RISK DETECTED</div>
+        <p class="result-subtitle">
+          Current conditions indicate a high probability of flooding
+        </p>
+
+        <div class="prob-gauge flood">
+          <span class="prob-label">Flood Probability</span>
+          <span class="prob-value">{{ probability }}%</span>
+          <span class="prob-sublabel">XGBoost confidence score</span>
+        </div>
+
+        <div class="prob-bar-wrap">
+          <div class="prob-bar-track">
+            <div class="prob-bar-fill flood"
+                 style="width: {{ probability }}%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advisory -->
+      <div class="advisory flood">
+        <h3>⚡ Immediate Actions Recommended</h3>
+        <div class="advisory-items">
+          <div class="advisory-item">
+            <span class="advisory-item-icon">🚨</span>
+            <span>Issue an official flood alert for the affected district immediately.</span>
+          </div>
+          <div class="advisory-item">
+            <span class="advisory-item-icon">🚶</span>
+            <span>Begin evacuation of all low-lying and historically flood-prone areas.</span>
+          </div>
+          <div class="advisory-item">
+            <span class="advisory-item-icon">📻</span>
+            <span>Activate public broadcast emergency warnings across all channels.</span>
+          </div>
+          <div class="advisory-item">
+            <span class="advisory-item-icon">🏥</span>
+            <span>Pre-position medical, rescue, and relief teams at staging areas.</span>
+          </div>
+          <div class="advisory-item">
+            <span class="advisory-item-icon">🌉</span>
+            <span>Monitor river levels, dam statuses, and drainage systems continuously.</span>
+          </div>
+          <div class="advisory-item">
+            <span class="advisory-item-icon">📞</span>
+            <span>Alert the National Disaster Response Force (NDRF) and State authorities.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Summary -->
+      <div class="input-summary">
+        <h3>📋 Input values used in this prediction</h3>
+        <div class="summary-grid">
+          {% for key, value in inputs.items() %}
+          <div class="summary-item">
+            <span class="s-key">{{ key }}</span>
+            <span class="s-val">{{ value }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="result-footer">
+        <div class="result-footer-meta">
+          Model: <strong>XGBoost</strong> &nbsp;·&nbsp;
+          Accuracy: <strong>96.55%</strong> &nbsp;·&nbsp;
+          Status: <strong style="color:#FF6B6B;">HIGH RISK</strong>
+        </div>
+        <div class="result-actions">
+          <a href="/Predict" class="btn btn-ghost">← New Prediction</a>
+          <a href="/"        class="btn btn-outline">🏠 Home</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    🌊 Rising Waters &nbsp;·&nbsp; ML Flood Prediction System
+    &nbsp;·&nbsp; Built with Python, XGBoost &amp; Flask
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

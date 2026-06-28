@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flood Risk Prediction — Rising Waters</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span>🌊</span>
+      <span>Rising <em>Waters</em></span>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/Predict" class="active nav-cta">Predict Now</a>
+    </div>
+  </nav>
+
+  <!-- ── Page Header ──────────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-header-label">⚡ Live Prediction</div>
+    <h1>Flood Risk Assessment</h1>
+    <p>Enter current meteorological readings for your region</p>
+  </div>
+
+  <!-- ── Form ─────────────────────────────────────────── -->
+  <div class="predict-wrapper">
+
+    {% if error %}
+    <div class="alert alert-error">⚠️ &nbsp;{{ error }}</div>
+    {% endif %}
+
+    <form action="/Predict" method="POST" class="prediction-form">
+      <div class="predict-card">
+
+        <!-- Card Header -->
+        <div class="predict-card-header">
+          <div>
+            <h2>Meteorological Input Parameters</h2>
+            <p>All 10 fields are required for accurate flood prediction</p>
+          </div>
+          <span class="feature-badge">10 features</span>
+        </div>
+
+        <!-- Inputs -->
+        <div class="predict-card-body">
+          <div class="inputs-grid">
+
+            <div class="input-group">
+              <label for="Temp">Temperature <span>28 – 31 °C</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Temp" name="Temp"
+                       step="0.1" min="20" max="50"
+                       placeholder="e.g. 29.5" required />
+                <span class="unit-tag">°C</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Humidity">Humidity <span>70 – 79 %</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Humidity" name="Humidity"
+                       step="0.1" min="0" max="100"
+                       placeholder="e.g. 74" required />
+                <span class="unit-tag">%</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Cloud Cover">Cloud Cover <span>30 – 44 %</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Cloud Cover" name="Cloud Cover"
+                       step="0.1" min="0" max="100"
+                       placeholder="e.g. 36" required />
+                <span class="unit-tag">%</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="ANNUAL">Annual Rainfall <span>2069 – 4258 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="ANNUAL" name="ANNUAL"
+                       step="0.1" min="0"
+                       placeholder="e.g. 2925" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Jan-Feb">Jan – Feb Rainfall <span>0.3 – 98 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Jan-Feb" name="Jan-Feb"
+                       step="0.1" min="0"
+                       placeholder="e.g. 27.7" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Mar-May">Mar – May Rainfall <span>90 – 915 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Mar-May" name="Mar-May"
+                       step="0.1" min="0"
+                       placeholder="e.g. 377" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Jun-Sep">Jun – Sep Rainfall <span>1104 – 3451 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Jun-Sep" name="Jun-Sep"
+                       step="0.1" min="0"
+                       placeholder="e.g. 2023" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="Oct-Dec">Oct – Dec Rainfall <span>167 – 823 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="Oct-Dec" name="Oct-Dec"
+                       step="0.1" min="0"
+                       placeholder="e.g. 498" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="avgjune">Avg June Rainfall <span>65 – 366 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="avgjune" name="avgjune"
+                       step="0.1" min="0"
+                       placeholder="e.g. 218" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="sub">Sub-divisional Rainfall <span>34 – 983 mm</span></label>
+              <div class="input-wrap">
+                <input type="number" id="sub" name="sub"
+                       step="0.1" min="0"
+                       placeholder="e.g. 440" required />
+                <span class="unit-tag">mm</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="predict-card-footer">
+          <button type="reset"  class="btn btn-ghost">↺ Clear</button>
+          <button type="submit" class="btn btn-primary">⚡ Predict Flood Risk</button>
+        </div>
+
+      </div>
+    </form>
+
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted);">
+      Model: <span style="color:var(--cyan-400);font-family:var(--mono);">XGBoost</span>
+      &nbsp;·&nbsp;
+      Accuracy: <span style="color:var(--cyan-400);font-family:var(--mono);">96.55%</span>
+      &nbsp;·&nbsp;
+      Scaler: <span style="color:var(--cyan-400);font-family:var(--mono);">transform.save</span>
+    </p>
+
+  </div>
+
+  <footer class="site-footer">
+    🌊 Rising Waters &nbsp;·&nbsp; ML Flood Prediction System
+    &nbsp;·&nbsp; Built with Python, XGBoost &amp; Flask
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
